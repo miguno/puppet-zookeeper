@@ -157,6 +157,13 @@ Example:
     $ sudo supervisorctl status zookeeper
     zookeeper                        RUNNING    pid 16461, uptime 2 days, 22:41:21
 
+You can also use ZooKeeper's [Four Letter Words](http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_zkCommands)
+to interact with ZooKeeper.
+
+    # Example: Ask ZooKeeper "Are you ok?"
+    $ echo ruok | nc 127.0.0.1 2181
+    imok
+
 
 <a name="log-files"></a>
 
