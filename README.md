@@ -67,6 +67,9 @@ See section [Usage](#usage) below.
   that you add this modules to your Puppet setup via [librarian-puppet](https://github.com/rodjek/librarian-puppet).
   See the `Puppetfile` snippet in section _Installation_ below for a starting example.
 * This module has primarily been tested with ZooKeeper 3.4.5.
+* When using Vagrant: Depending on your Vagrant box (image) you may need to manually configure/disable firewall
+  settings -- otherwise machines may not be able to talk to each other.  One option to manage firewall settings is via
+  [puppetlabs-firewall](https://github.com/puppetlabs/puppetlabs-firewall).
 
 
 <a name="installation"></a>
