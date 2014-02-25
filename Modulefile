@@ -1,6 +1,6 @@
 name 'wirbelsturm-zookeeper'
 version '1.0.0'
-source 'https://github.com/miguno/puppet-zookeeper'
+source 'https://github.com/miguno/puppet-zookeeper.git'
 author 'Michael G. Noll'
 license 'Apache License, Version 2.0'
 summary 'Module for managing and configuring ZooKeeper'
