@@ -33,7 +33,7 @@ Table of Contents
 
 # Quick start
 
-See section [Usage examples](#usage) below.
+See section [Usage](#usage) below.
 
 
 <a name="features"></a>
