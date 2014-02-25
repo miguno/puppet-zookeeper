@@ -40,8 +40,8 @@ See section [Usage examples](#usage) below.
 
 # Features
 
-* Decouples code (Puppet manifests) from configuration data (Hiera) through the use of Puppet class parameters.
-  Hence you should use Hiera to control how ZooKeeper is deployed and to which machines.
+* Decouples code (Puppet manifests) from configuration data (Hiera) through the use of Puppet parameterized classes,
+  i.e. class parameters.  Hence you should use Hiera to control how ZooKeeper is deployed and to which machines.
 * Supports RHEL OS family (e.g. RHEL 6, CentOS 6, Amazon Linux).
     * Code contributions to support additional OS families are welcome!
 * ZooKeeper is run under process supervision via [supervisord](http://www.supervisord.org/) version 3.0+.
