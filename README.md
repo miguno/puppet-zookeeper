@@ -161,7 +161,7 @@ You can also use ZooKeeper's [Four Letter Words](http://zookeeper.apache.org/doc
 to interact with ZooKeeper.
 
     # Example: Ask ZooKeeper "Are you ok?"
-    $ echo ruok | nc 127.0.0.1 2181
+    $ echo ruok | nc <zookeeper-ip> 2181
     imok
 
 
