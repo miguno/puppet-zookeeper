@@ -186,6 +186,7 @@ _Note: The locations below may be different depending on the ZooKeeper RPM you a
 * Use a hash data structure to allow the user to configure non-critical ZooKeeper configuration parameters
   (which means we don't have to manually add a class parameter to support each possible ZooKeeper config
   setting).
+* Add unit tests and specs.
 
 
 <a name="changelog"></a>
