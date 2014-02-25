@@ -55,8 +55,9 @@ See section [Usage examples](#usage) below.
   **configured** for pulling the ZooKeeper package (i.e. RPM).
     * One option is to use the ZooKeeper RPM provided by Cloudera.  See
       [cloudera-cdh4.repo](http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/cloudera-cdh4.repo).
-* This module requires that the target machines have a **Java JRE/JDK installed** (e.g. via a separate Puppet module).
-  You may also want to make sure that the Java package is installed _before_ ZooKeeper to prevent startup problems.
+* This module requires that the target machines have a **Java JRE/JDK installed** (e.g. via a separate Puppet module
+  such as [puppetlabs-java](https://github.com/puppetlabs/puppetlabs-java)).  You may also want to make sure that the
+  Java package is installed _before_ ZooKeeper to prevent startup problems.
     * Because different teams may have different approaches to install "base" packages such as Java, this module does
       intentionally not puppet-require Java directly.
 * This module requires the [puppet-supervisor](https://github.com/miguno/puppet-supervisor) module.  It is recommended
