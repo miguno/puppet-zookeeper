@@ -1,0 +1,24 @@
+#
+# This file is managed by Puppet.
+#
+
+maxClientCnxns=<%= scope.lookupvar('zookeeper::max_client_connections') %>
+# The number of milliseconds of each tick.
+tickTime=<%= scope.lookupvar('zookeeper::tick_time') %>
+# The number of ticks that the initial synchronization phase can take.
+initLimit=<%= scope.lookupvar('zookeeper::init_limit') %>
+# The number of ticks that can pass between sending a request and getting an acknowledgement.
+syncLimit=<%= scope.lookupvar('zookeeper::sync_limit') %>
+# The directory where the snapshot is stored.
+dataDir=<%= scope.lookupvar('zookeeper::data_dir') %>
+# The port at which the clients will connect.
+clientPort=<%= scope.lookupvar('zookeeper::client_port') %>
+
+# Enable regular purging of old data and transaction logs every 24 hours
+autopurge.purgeInterval=<%= scope.lookupvar('zookeeper::autopurge_purge_interval') %>
+autopurge.snapRetainCount=<%= scope.lookupvar('zookeeper::autopurge_snap_retain_count') %>
+
+# Quorum configuration (if any)
+<% scope.lookupvar('zookeeper::quorum').each do |zkserver_record| -%>
+<%= zkserver_record %>
+<% end -%>
