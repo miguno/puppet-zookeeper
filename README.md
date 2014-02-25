@@ -94,7 +94,7 @@ mod 'supervisor',
   :git => 'https://github.com/miguno/puppet-supervisor.git'
 ```
 
-Then use librarian-puppet to install (or update) the Puppet module.
+Then use librarian-puppet to install (or update) the Puppet modules.
 
 
 <a name="configuration"></a>
