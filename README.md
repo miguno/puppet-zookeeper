@@ -63,11 +63,11 @@ See section [Usage](#usage) below.
   Java package is installed _before_ ZooKeeper to prevent startup problems.
     * Because different teams may have different approaches to install "base" packages such as Java, this module does
       intentionally not puppet-require Java directly.
-* This module requires the [puppet-supervisor](https://github.com/miguno/puppet-supervisor) module.  It is recommended
-  that you add this modules to your Puppet setup via [librarian-puppet](https://github.com/rodjek/librarian-puppet).
-  See the `Puppetfile` snippet in section _Installation_ below for a starting example.
-* This module has primarily been tested with ZooKeeper 3.4.5.
-* When using Vagrant: Depending on your Vagrant box (image) you may need to manually configure/disable firewall
+* This module requires the following **additional Puppet modules**.  It is recommended that you add this modules to your
+  Puppet setup via [librarian-puppet](https://github.com/rodjek/librarian-puppet).  See the `Puppetfile` snippet in
+  section _Installation_ below for a starting example.
+    * [puppet-supervisor](https://github.com/miguno/puppet-supervisor)
+* **When using Vagrant**: Depending on your Vagrant box (image) you may need to manually configure/disable firewall
   settings -- otherwise machines may not be able to talk to each other.  One option to manage firewall settings is via
   [puppetlabs-firewall](https://github.com/puppetlabs/puppetlabs-firewall).
 
