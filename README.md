@@ -124,6 +124,7 @@ Simple example, using default settings.  This will start a ZooKeeper server that
 ```yaml
 ---
 classes:
+  - supervisor
   - zookeeper::service
 ```
 
@@ -132,8 +133,14 @@ More sophisticated example that overrides some of the default settings:
 ```yaml
 ---
 classes:
+  - supervisor
   - zookeeper::service
 
+## Supervisord
+supervisor::logfile_maxbytes: '20MB'
+supervisor::logfile_backups: 5
+
+## ZooKeeper
 zookeeper::autopurge_snap_retain_count: 3
 zookeeper::max_client_connections: 500
 zookeeper::myid: 1
@@ -146,19 +153,6 @@ zookeeper::myid: 1
 #  - 'server.1=zookeeper1:2888:3888'
 #  - 'server.2=zookeeper2:2888:3888'
 #  - 'server.3=zookeeper3:2888:3888'
-```
-
-A "full" example that includes the deployment of [supervisord](http://www.supervisord.org/) via
-[puppet-supervisor](https://github.com/miguno/puppet-supervisor).
-
-```yaml
----
-classes:
-  - supervisor
-  - zookeeper::service
-
-supervisor::logfile_maxbytes: '20MB'
-supervisor::logfile_backups: 5
 ```
 
 
