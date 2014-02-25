@@ -51,14 +51,14 @@ See section [Usage examples](#usage) below.
 
 # Requirements and assumptions
 
-* This module requires that the target machines to which you are deploying ZooKeeper have yum repositories configured
-  for pulling the ZooKeeper package (i.e. RPM).
+* This module requires that the target machines to which you are deploying ZooKeeper have **yum repositories**
+  **configured** for pulling the ZooKeeper package (i.e. RPM).
     * One option is to use the ZooKeeper RPM provided by Cloudera.  See
       [cloudera-cdh4.repo](http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/cloudera-cdh4.repo).
-* This module requires that the target machines have a Java JRE/JDK installed (e.g. via a separate Puppet module).
+* This module requires that the target machines have a **Java JRE/JDK installed** (e.g. via a separate Puppet module).
   Because different teams may have different approaches to install "base" packages such as Java, this module does
   intentionally not puppet-require Java directly.
-* This module requires the [puppet-supervisor](https://github.com/miguno/puppet-supervisor) modules.  It is recommended
+* This module requires the [puppet-supervisor](https://github.com/miguno/puppet-supervisor) module.  It is recommended
   that you add this modules to your Puppet setup via [librarian-puppet](https://github.com/rodjek/librarian-puppet).
   See the `Puppetfile` snippet in section _Installation_ below for a starting example.
 * This module has primarily been tested with ZooKeeper 3.4.5.
