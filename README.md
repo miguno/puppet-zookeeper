@@ -134,6 +134,18 @@ zookeeper::myid: 1
 #  - 'server.3=zookeeper3:2888:3888'
 ```
 
+A "full" example that includes the deployment of [supervisord](http://www.supervisord.org/):
+
+```yaml
+---
+classes:
+  - supervisor
+  - zookeeper::service
+
+supervisor::logfile_maxbytes: '20MB'
+supervisor::logfile_backups: 5
+```
+
 
 <a name="manifests"></a>
 
