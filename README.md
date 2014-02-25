@@ -44,6 +44,7 @@ See section [Usage examples](#usage) below.
   i.e. class parameters.  Hence you should use Hiera to control how ZooKeeper is deployed and to which machines.
 * Supports RHEL OS family (e.g. RHEL 6, CentOS 6, Amazon Linux).
     * Code contributions to support additional OS families are welcome!
+* Supports deployment of standalone ZooKeeper setups (1 node) as well as ZooKeeper quorums (3+ nodes).
 * ZooKeeper is run under process supervision via [supervisord](http://www.supervisord.org/) version 3.0+.
 
 
