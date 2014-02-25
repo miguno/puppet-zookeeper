@@ -60,7 +60,7 @@ See section [Usage examples](#usage) below.
   intentionally not puppet-require Java directly.
 * This module requires the [puppet-supervisor](https://github.com/miguno/puppet-supervisor) modules.  It is recommended
   that you add this modules to your Puppet setup via [librarian-puppet](https://github.com/rodjek/librarian-puppet).
-  See the `Puppetfile` snippet in section _Installation_ above for a starting example.
+  See the `Puppetfile` snippet in section _Installation_ below for a starting example.
 * This module has primarily been tested with ZooKeeper 3.4.5.
 
 
