@@ -40,6 +40,7 @@ See section [Usage](#usage) below.
 
 # Features
 
+* Supports ZooKeeper 3.4.5+.  May work with earlier versions, too.
 * Decouples code (Puppet manifests) from configuration data (Hiera) through the use of Puppet parameterized classes,
   i.e. class parameters.  Hence you should use Hiera to control how ZooKeeper is deployed and to which machines.
 * Supports RHEL OS family (e.g. RHEL 6, CentOS 6, Amazon Linux).
