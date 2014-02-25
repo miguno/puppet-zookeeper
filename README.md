@@ -57,7 +57,8 @@ See section [Usage examples](#usage) below.
       [cloudera-cdh4.repo](http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/cloudera-cdh4.repo).
 * This module requires that the target machines have a **Java JRE/JDK installed** (e.g. via a separate Puppet module).
   Because different teams may have different approaches to install "base" packages such as Java, this module does
-  intentionally not puppet-require Java directly.
+  intentionally not puppet-require Java directly.  You may also want to make sure that the Java package is installed
+  _before_ ZooKeeper to prevent startup problems.
 * This module requires the [puppet-supervisor](https://github.com/miguno/puppet-supervisor) module.  It is recommended
   that you add this modules to your Puppet setup via [librarian-puppet](https://github.com/rodjek/librarian-puppet).
   See the `Puppetfile` snippet in section _Installation_ below for a starting example.
