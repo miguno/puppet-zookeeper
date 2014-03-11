@@ -10,10 +10,12 @@ class zookeeper::config inherits zookeeper {
   }
 
   file { $data_dir:
-    ensure => directory,
-    owner  => $user,
-    group  => $group,
-    mode   => '0755',
+    ensure       => directory,
+    owner        => $user,
+    group        => $group,
+    mode         => '0755',
+    recurse      => true,
+    recurselimit => 0,
   }
 
   if $is_standalone == false {
