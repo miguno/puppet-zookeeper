@@ -6,7 +6,7 @@ class zookeeper::config inherits zookeeper {
     group   => root,
     mode    => '0644',
     content => template($config_template),
-    require => [ Package["zookeeper-server"] ],
+    require => Class['zookeeper::install'],
   }
 
   if $is_standalone == false {
@@ -17,7 +17,7 @@ class zookeeper::config inherits zookeeper {
       group   => $group,
       mode    => '0644',
       content => "${myid}\n",
-      require => [ Package["zookeeper-server"], File[$data_dir] ],
+      require => Class['zookeeper::install'],
     }
   }
 
