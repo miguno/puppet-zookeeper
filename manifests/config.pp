@@ -9,15 +9,6 @@ class zookeeper::config inherits zookeeper {
     require => [ Package["zookeeper-server"] ],
   }
 
-  file { $data_dir:
-    ensure       => directory,
-    owner        => $user,
-    group        => $group,
-    mode         => '0755',
-    recurse      => true,
-    recurselimit => 0,
-  }
-
   if $is_standalone == false {
     file { 'zookeeper-myid':
       path    => "${data_dir}/myid",
