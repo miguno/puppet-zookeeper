@@ -1,10 +1,17 @@
 # Change log
 
+## 1.0.2 (March 11, 2014)
+
+BUG FIXES:
+
+* Correctly create `$data_dir` recursively.  (Doh!)
+
+
 ## 1.0.1 (March 11, 2014)
 
-IMPROVEMENTS
+IMPROVEMENTS:
 
-* Recursively create `$data_dir` if needed
+* Recursively create `$data_dir` if needed.
 
 
 ## 1.0.0 (February 25, 2014)
