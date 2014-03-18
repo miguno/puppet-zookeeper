@@ -1,7 +1,7 @@
 # puppet-zookeeper
 
-Wirbelsturm-compatible [Puppet](http://puppetlabs.com/) module to deploy [ZooKeeper](http://zookeeper.apache.org/)
-servers.
+[Wirbelsturm](https://github.com/miguno/wirbelsturm)-compatible [Puppet](http://puppetlabs.com/) module to deploy
+[ZooKeeper](http://zookeeper.apache.org/) servers.
 
 You can use this Puppet module to deploy ZooKeeper to physical and virtual machines, for instance via your existing
 internal or cloud-based Puppet infrastructure and via a tool such as [Vagrant](http://www.vagrantup.com/) for local
