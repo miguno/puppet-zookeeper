@@ -1,5 +1,10 @@
 # Change log
 
+## 1.0.3+2 (March 20, 2014)
+
+* Use semantic versioning, e.g. `1.0.3+1` instead of `1.0.3.1`.  Otherwise librarian-puppet will fail.
+
+
 ## 1.0.3.1 (March 20, 2014)
 
 * Correctly bump version in `Modulefile` to 1.0.3.1.
