@@ -2,8 +2,10 @@ class zookeeper::params {
   $autopurge_purge_interval    = 24
   $autopurge_snap_retain_count = 5
   $client_port            = 2181
-  $command                = '/usr/bin/zookeeper-server' # managed by zookeeper-server RPM, do not change unless you
+  $zookeeper_start_binary = '/usr/bin/zookeeper-server' # managed by zookeeper-server RPM, do not change unless you
                                                         # are certain that your RPM uses a different path
+  # Because $command relies on the $zookeeper_start_binary variable, it must be defined AFTER $zookeeper_start_binary.
+  $command                = "$zookeeper_start_binary start-foreground"
   $config                 = '/etc/zookeeper/conf/zoo.cfg' # managed by zookeeper-server RPM, do not change unless you
                                                           # are certain that your RPM uses a different path
   $config_template        = 'zookeeper/zoo.cfg.erb'

@@ -27,7 +27,7 @@ class zookeeper::service inherits zookeeper {
       $service_name:
         ensure                 => $service_ensure,
         enable                 => $service_enable,
-        command                => "${command} start-foreground",
+        command                => $command,
         directory              => '/',
         user                   => $user,
         group                  => $group,

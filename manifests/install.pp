@@ -5,6 +5,17 @@ class zookeeper::install inherits zookeeper {
     name    => $package_name,
   }
 
+  # We provide a custom zookeeper-server startup script.  This script fixes a problem where supervisord is not able to
+  # restart the ZooKeeper processes (parent and child).  See https://github.com/miguno/puppet-zookeeper/issues/1.
+  file { $zookeeper_start_binary:
+    ensure  => file,
+    source  => "puppet:///modules/${module_name}/zookeeper-server",
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => Package['zookeeper-server'],
+  }
+
   # This exec ensures we create intermediate directories for $data_dir as required
   exec { 'create-zookeeper-data-directory':
     command => "mkdir -p ${data_dir}",

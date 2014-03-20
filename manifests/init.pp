@@ -31,6 +31,7 @@ class zookeeper (
   $sync_limit             = $zookeeper::params::sync_limit,
   $tick_time              = $zookeeper::params::tick_time,
   $user                   = $zookeeper::params::user,
+  $zookeeper_start_binary = $zookeeper::params::zookeeper_start_binary,
 ) inherits zookeeper::params {
 
   if !is_integer($autopurge_purge_interval) {
@@ -73,6 +74,7 @@ class zookeeper (
   if !is_integer($sync_limit) { fail('The $sync_limit parameter must be an integer number') }
   if !is_integer($tick_time) { fail('The $tick_time parameter must be an integer number') }
   validate_string($user)
+  validate_absolute_path($zookeeper_start_binary)
 
   $is_standalone = empty($quorum)
 
