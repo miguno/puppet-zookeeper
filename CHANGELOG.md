@@ -1,5 +1,10 @@
 # Change log
 
+## 1.0.3.1 (March 20, 2014)
+
+* Correctly bump version in `Modulefile` to 1.0.3.1.
+
+
 ## 1.0.3 (March 20, 2014)
 
 GENERAL CHANGES
