@@ -34,7 +34,7 @@ class zookeeper::params {
   $service_stdout_logfile_keep    = 5
   $service_stdout_logfile_maxsize = '20MB'
   $service_stopasgroup    = true
-  $service_stopsignal     = 'KILL'
+  $service_stopsignal     = 'INT'
   $sync_limit             = 5
   $tick_time              = 2000
   $user                   = 'zookeeper' # managed by zookeeper-server RPM, do not change unless you are certain that

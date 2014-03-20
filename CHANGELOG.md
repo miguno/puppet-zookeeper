@@ -2,6 +2,10 @@
 
 ## 1.0.3 (March 20, 2014)
 
+GENERAL CHANGES
+
+* Change stop signal of (supervised) zookeeper process from KILL to INT.
+
 BUG FIXES
 
 * GH-1: supervisord restart problems when zookeeper-server is killed
