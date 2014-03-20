@@ -1,5 +1,11 @@
 # Change log
 
+## 1.0.4 (March 20, 2014)
+
+* Only use x.y.z to specify versions because librarian-puppet is very picky, and seems not to fully comply to
+  semantic versioning rules.
+
+
 ## 1.0.3+2 (March 20, 2014)
 
 * Use semantic versioning, e.g. `1.0.3+1` instead of `1.0.3.1`.  Otherwise librarian-puppet will fail.
