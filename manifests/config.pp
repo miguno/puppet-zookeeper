@@ -1,3 +1,5 @@
+# == Class zookeeper::config
+#
 class zookeeper::config inherits zookeeper {
 
   file { $config:
@@ -11,8 +13,8 @@ class zookeeper::config inherits zookeeper {
 
   if $is_standalone == false {
     file { 'zookeeper-myid':
-      path    => "${data_dir}/myid",
       ensure  => file,
+      path    => "${data_dir}/myid",
       owner   => $user,
       group   => $group,
       mode    => '0644',

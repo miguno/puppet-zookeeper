@@ -1,3 +1,5 @@
+# == Class zookeeper
+#
 class zookeeper (
   $autopurge_purge_interval    = $zookeeper::params::autopurge_purge_interval,
   $autopurge_snap_retain_count = $zookeeper::params::autopurge_snap_retain_count,

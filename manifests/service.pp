@@ -1,3 +1,5 @@
+# == Class zookeeper::service
+#
 class zookeeper::service inherits zookeeper {
 
   # See also:

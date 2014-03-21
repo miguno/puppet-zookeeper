@@ -1,3 +1,5 @@
+# == Class zookeeper::install
+#
 class zookeeper::install inherits zookeeper {
 
   package { 'zookeeper-server':

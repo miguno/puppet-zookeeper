@@ -1,5 +1,19 @@
 # Change log
 
+## 1.0.5 (March 21, 2014)
+
+IMPROVEMENTS
+
+* Add `$user_manage` and `$group_manage` parameters.
+* Initial support for testing this module.
+    * A skeleton for acceptance testing (`rake acceptance`) was also added.  Acceptance tests do not work yet.
+
+BACKWARDS INCOMPATIBILITY
+
+* Change default value of `$package_ensure` from "latest" to "present".
+* Puppet module fails if run on an unsupported platform.  Currently we only support the RHEL OS family.
+
+
 ## 1.0.4 (March 20, 2014)
 
 * Only use x.y.z to specify versions because librarian-puppet is very picky, and seems not to fully comply to

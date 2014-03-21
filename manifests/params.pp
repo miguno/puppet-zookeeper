@@ -1,3 +1,5 @@
+# == Class zookeeper::params
+#
 class zookeeper::params {
   $autopurge_purge_interval    = 24
   $autopurge_snap_retain_count = 5
@@ -5,7 +7,7 @@ class zookeeper::params {
   $zookeeper_start_binary = '/usr/bin/zookeeper-server' # managed by zookeeper-server RPM, do not change unless you
                                                         # are certain that your RPM uses a different path
   # Because $command relies on the $zookeeper_start_binary variable, it must be defined AFTER $zookeeper_start_binary.
-  $command                = "$zookeeper_start_binary start-foreground"
+  $command                = "${zookeeper_start_binary} start-foreground"
   $config                 = '/etc/zookeeper/conf/zoo.cfg' # managed by zookeeper-server RPM, do not change unless you
                                                           # are certain that your RPM uses a different path
   $config_template        = 'zookeeper/zoo.cfg.erb'
@@ -17,11 +19,12 @@ class zookeeper::params {
   $max_client_connections = 50
   $myid                   = 1
   $package_name           = 'zookeeper-server'
-  $package_ensure         = 'latest'
+  $package_ensure         = 'present'
   $peer_port              = 2888
-  $quorum                 = [] # If you want to use a quorum (normally 3 or 5 members), set this variable to e.g.
-                               # ['server.1=zookeeper1:2888:3888', 'server.2=zookeeper2:2888:3888', ...] where
-                               # server.<X> corresponds to a machine's 'zookeeper::myid'.
+  # If you want to use a quorum (normally 3 or 5 members), set this variable to e.g.
+  # ['server.1=zookeeper1:2888:3888', 'server.2=zookeeper2:2888:3888', ...] where # server.<X> corresponds to a
+  # machine's 'zookeeper::myid'.
+  $quorum                 = []
   $service_autorestart    = true
   $service_enable         = true
   $service_ensure         = 'present'
@@ -39,4 +42,11 @@ class zookeeper::params {
   $tick_time              = 2000
   $user                   = 'zookeeper' # managed by zookeeper-server RPM, do not change unless you are certain that
                                         # your RPM uses a different user
+  case $::osfamily {
+    'RedHat': {}
+
+    default: {
+      fail("The ${module_name} module is not supported on a ${::osfamily} based system.")
+    }
+  }
 }

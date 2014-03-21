@@ -1,5 +1,5 @@
 name 'wirbelsturm-zookeeper'
-version '1.0.4'
+version '1.0.5'
 source 'https://github.com/miguno/puppet-zookeeper.git'
 author 'Michael G. Noll'
 license 'Apache License, Version 2.0'
