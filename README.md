@@ -1,4 +1,4 @@
-# puppet-zookeeper
+# puppet-zookeeper [![Build Status](https://travis-ci.org/miguno/puppet-zookeeper.png?branch=master)](https://travis-ci.org/miguno/puppet-zookeeper)
 
 [Wirbelsturm](https://github.com/miguno/wirbelsturm)-compatible [Puppet](http://puppetlabs.com/) module to deploy
 [ZooKeeper](http://zookeeper.apache.org/) servers.
