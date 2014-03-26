@@ -190,7 +190,6 @@ DEPENDENCIES
   puppet-lint
   puppet-syntax
   puppetlabs_spec_helper
-  rake
   rspec-puppet!
   serverspec
   travis
