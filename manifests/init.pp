@@ -15,6 +15,7 @@ class zookeeper (
   $myid                   = $zookeeper::params::myid,
   $package_name           = $zookeeper::params::package_name,
   $package_ensure         = $zookeeper::params::package_ensure,
+  $package_origin         = $zookeeper::params::package_origin,
   $peer_port              = $zookeeper::params::peer_port,
   $quorum                 = $zookeeper::params::quorum,
   $service_autorestart    = hiera('zookeeper::service_autorestart', $zookeeper::params::service_autorestart),

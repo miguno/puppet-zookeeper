@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'zookeeper' do
   context 'supported operating systems' do
-    ['RedHat'].each do |osfamily|
-      ['RedHat', 'CentOS', 'Amazon', 'Fedora'].each do |operatingsystem|
+    ['RedHat', 'Debian'].each do |osfamily|
+      ['RedHat', 'CentOS', 'Amazon', 'Fedora', 'Ubuntu', 'Debian'].each do |operatingsystem|
         let(:facts) {{
           :osfamily        => osfamily,
           :operatingsystem => operatingsystem,
@@ -112,7 +112,26 @@ describe 'zookeeper' do
             /"server.1=zookeeper1:2888:3888,server.2=zookeeper2:2888:3888" is not an Array.  It looks to be a String/)
           }
         end
-
+        describe "Zookeeper class with package_origin something other than the Cloudera repo" do
+          let(:params) { {:package_origin => 'Ant-package'} }
+          it { should contain_exec('zookeeper-initialize').with({
+            'command' => 'service zookeeper-server init',
+            'path'    => ['/usr/bin', '/usr/sbin', '/sbin', '/bin'],
+            'user'    => 'root',
+            'onlyif'  => '',
+            'require' => [ 'Class[Zookeeper::Install]', 'Class[Zookeeper::Config]' ],
+          })}
+        end
+        describe "Zookeeper class with package name different than zookeeper-server" do
+          let(:params) { {:package_name => 'zoo-keeper'} }
+          it { should contain_exec('zookeeper-initialize').with({
+            'command' => 'service zoo-keeper init',
+            'path'    => ['/usr/bin', '/usr/sbin', '/sbin', '/bin'],
+            'user'    => 'root',
+            'onlyif'  => 'test ! -d /var/lib/zookeeper/version-2',
+            'require' => [ 'Class[Zookeeper::Install]', 'Class[Zookeeper::Config]' ],
+          })}
+        end
       end
     end
   end
@@ -120,11 +139,11 @@ describe 'zookeeper' do
   context 'unsupported operating system' do
     describe 'zookeeper class without any parameters on Debian' do
       let(:facts) {{
-        :osfamily => 'Debian',
+        :osfamily => 'Non-RHEL-non-Debian',
       }}
 
       it { expect { should contain_package('zookeeper') }.to raise_error(Puppet::Error,
-        /The zookeeper module is not supported on a Debian based system./) }
+        /The zookeeper module is not supported on a Non-RHEL-non-Debian based system./) }
     end
   end
 end

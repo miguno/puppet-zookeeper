@@ -20,6 +20,7 @@ class zookeeper::params {
   $myid                   = 1
   $package_name           = 'zookeeper-server'
   $package_ensure         = 'present'
+  $package_origin         = 'Cloudera'
   $peer_port              = 2888
   # If you want to use a quorum (normally 3 or 5 members), set this variable to e.g.
   # ['server.1=zookeeper1:2888:3888', 'server.2=zookeeper2:2888:3888', ...] where # server.<X> corresponds to a
@@ -44,6 +45,7 @@ class zookeeper::params {
                                         # your RPM uses a different user
   case $::osfamily {
     'RedHat': {}
+    'Debian': {}
 
     default: {
       fail("The ${module_name} module is not supported on a ${::osfamily} based system.")

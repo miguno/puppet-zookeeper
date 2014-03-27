@@ -12,13 +12,18 @@ class zookeeper::service inherits zookeeper {
 
   if $service_manage == true {
 
-    $initialize_check = $is_standalone ? {
-      true  => "test ! -d ${data_dir}/version-2",
-      false => "test ! -d ${data_dir}/version-2 -o ! -s ${data_dir}/myid",
-    }
+    if $package_origin != 'Cloudera' {
+	    $initialize_check = $is_standalone ? {
+	      true  => "test ! -d ${data_dir}/version-2",
+	      false => "test ! -d ${data_dir}/version-2 -o ! -s ${data_dir}/myid",
+	    }
+	  }
+	  else {
+	    $initialize_check = ''
+	  }
 
     exec { 'zookeeper-initialize':
-      command => 'service zookeeper-server init',
+      command => "service ${package_name} init",
       path    => ['/usr/bin', '/usr/sbin', '/sbin', '/bin'],
       user    => 'root',
       onlyif  => $initialize_check,
