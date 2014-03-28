@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'zookeeper::service' do
   context 'supported operating systems' do
-    ['RedHat'].each do |osfamily|
-      ['RedHat', 'CentOS', 'Amazon', 'Fedora'].each do |operatingsystem|
+    ['RedHat', 'Debian'].each do |osfamily|
+      ['RedHat', 'CentOS', 'Amazon', 'Fedora', 'Ubuntu', 'Debian'].each do |operatingsystem|
         let(:facts) {{
           :osfamily        => osfamily,
           :operatingsystem => operatingsystem,

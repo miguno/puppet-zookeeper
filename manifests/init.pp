@@ -15,6 +15,7 @@ class zookeeper (
   $myid                   = $zookeeper::params::myid,
   $package_name           = $zookeeper::params::package_name,
   $package_ensure         = $zookeeper::params::package_ensure,
+  $package_origin         = $zookeeper::params::package_origin,
   $peer_port              = $zookeeper::params::peer_port,
   $quorum                 = $zookeeper::params::quorum,
   $service_autorestart    = hiera('zookeeper::service_autorestart', $zookeeper::params::service_autorestart),
@@ -54,6 +55,7 @@ class zookeeper (
   if !is_integer($myid) { fail('The $myid parameter must be an integer number') }
   validate_string($package_name)
   validate_string($package_ensure)
+  validate_string($package_origin)
   if !is_integer($peer_port) { fail('The $peer_port parameter must be an integer number') }
   validate_array($quorum)
   validate_bool($service_autorestart)
