@@ -12,7 +12,7 @@ class zookeeper::service inherits zookeeper {
 
   if $service_manage == true {
 
-    if $package_origin != 'Cloudera' {
+    if $package_origin == 'Cloudera' {
       $initialize_check = $is_standalone ? {
         true  => "test ! -d ${data_dir}/version-2",
         false => "test ! -d ${data_dir}/version-2 -o ! -s ${data_dir}/myid",
