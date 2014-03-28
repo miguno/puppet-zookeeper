@@ -19,7 +19,7 @@ class zookeeper::service inherits zookeeper {
       }
     }
     else {
-      $initialize_check = ''
+      $initialize_check = 'false'
     }
 
     exec { 'zookeeper-initialize':

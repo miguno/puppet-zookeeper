@@ -118,7 +118,7 @@ describe 'zookeeper' do
             'command' => 'service zookeeper-server init',
             'path'    => ['/usr/bin', '/usr/sbin', '/sbin', '/bin'],
             'user'    => 'root',
-            'onlyif'  => '',
+            'onlyif'  => 'false',
             'require' => [ 'Class[Zookeeper::Install]', 'Class[Zookeeper::Config]' ],
           })}
         end

@@ -55,6 +55,7 @@ class zookeeper (
   if !is_integer($myid) { fail('The $myid parameter must be an integer number') }
   validate_string($package_name)
   validate_string($package_ensure)
+  validate_string($package_origin)
   if !is_integer($peer_port) { fail('The $peer_port parameter must be an integer number') }
   validate_array($quorum)
   validate_bool($service_autorestart)
