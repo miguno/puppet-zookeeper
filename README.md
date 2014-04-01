@@ -212,7 +212,7 @@ _Note: The locations below may be different depending on the ZooKeeper RPM you a
   (which means we don't have to manually add a class parameter to support each possible ZooKeeper config
   setting).
 * Add unit tests and specs.
-* Add Travis CI setup.
+* Add rollback/remove functionality to complete purge ZooKeeper related packages and configuration files from a machine.
 
 
 <a name="changelog"></a>
