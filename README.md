@@ -243,10 +243,7 @@ from scratch than both variants (dataDir-only and dataDir+dataLogDir setups) wil
 # TODO
 
 * Enhance in-line documentation of Puppet manifests.
-* Use a hash data structure to allow the user to configure non-critical ZooKeeper configuration parameters
-  (which means we don't have to manually add a class parameter to support each possible ZooKeeper config
-  setting).
-* Add unit tests and specs.
+* Add more unit tests and specs.
 * Add rollback/remove functionality to complete purge ZooKeeper related packages and configuration files from a machine.
 
 
