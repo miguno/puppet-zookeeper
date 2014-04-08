@@ -17,7 +17,7 @@ describe 'zookeeper class' do
     # TODO: Actually implement some acceptance tests.
     describe package('zookeeper') do
       # The following test does not work yet because we first need to add a yum repository to the test VM from which
-      # Puppet can retrieve the Storm (RPM) package.
+      # Puppet can retrieve the ZooKeeper (RPM) package.
       #it { should be_installed }
     end
 
