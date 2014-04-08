@@ -2,17 +2,14 @@
 ### This file is managed by Puppet.
 ###
 
-# The port at which the clients will connect.
 clientPort=<%= scope.lookupvar('zookeeper::client_port') %>
 
-# The directory where the snapshot is stored.
 dataDir=<%= scope.lookupvar('zookeeper::data_dir') %>
 
 <% if @data_log_dir -%>
 dataLogDir=<%= scope.lookupvar('zookeeper::data_log_dir') %>
 <% end -%>
 
-# Quorum configuration (if any)
 <% scope.lookupvar('zookeeper::quorum').each do |zkserver_record| -%>
 <%= zkserver_record %>
 <% end -%>
