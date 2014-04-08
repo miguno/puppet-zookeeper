@@ -12,6 +12,12 @@ class zookeeper::service inherits zookeeper {
 
   if $service_manage == true {
 
+    # Note: ZK actually requires the initialization of both dataDir and dataLogDir.  However the initialization script
+    # shipped with ZooKeeper only allows you to initialize both at the same time, and it will fail/exit whenever one
+    # (or both) of them are already initialized.  For this reason we do not add any logic that tries to detect which
+    # directory exactly is already initialized, and checking only on dataDir (the more important of the two) is
+    # sufficient.  Unfortunately, this behavior of ZK means that you will not be easily able to change from a
+    # dataDir-only setup to a split dataDir/dataLogDir setup -- doing so requires manual intervention.
     $initialize_check = $is_standalone ? {
       true  => "test ! -d ${data_dir}/version-2",
       false => "test ! -d ${data_dir}/version-2 -o ! -s ${data_dir}/myid",

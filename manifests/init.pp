@@ -1,21 +1,25 @@
 # == Class zookeeper
 #
+# === Parameters
+#
+# TODO: Document each class parameter.
+#
+# [*config_map*]
+#   Use this parameter for all other ZooKeeper related config options except those that are already exposed as class
+#   parameters (e.g. `$data_dir`, `$data_log_dir`, `$client_port`, `$myid`, `$quorum`).
+#
 class zookeeper (
-  $autopurge_purge_interval    = $zookeeper::params::autopurge_purge_interval,
-  $autopurge_snap_retain_count = $zookeeper::params::autopurge_snap_retain_count,
   $client_port            = $zookeeper::params::client_port,
   $command                = $zookeeper::params::command,
   $config                 = $zookeeper::params::config,
+  $config_map             = $zookeeper::params::config_map,
   $config_template        = $zookeeper::params::config_template,
   $data_dir               = $zookeeper::params::data_dir,
+  $data_log_dir           = $zookeeper::params::data_log_dir,
   $group                  = $zookeeper::params::group,
-  $init_limit             = $zookeeper::params::init_limit,
-  $leader_election_port   = $zookeeper::params::leader_election_port,
-  $max_client_connections = $zookeeper::params::max_client_connections,
   $myid                   = $zookeeper::params::myid,
   $package_name           = $zookeeper::params::package_name,
   $package_ensure         = $zookeeper::params::package_ensure,
-  $peer_port              = $zookeeper::params::peer_port,
   $quorum                 = $zookeeper::params::quorum,
   $service_autorestart    = hiera('zookeeper::service_autorestart', $zookeeper::params::service_autorestart),
   $service_enable         = hiera('zookeeper::service_enable', $zookeeper::params::service_enable),
@@ -30,31 +34,21 @@ class zookeeper (
   $service_stdout_logfile_maxsize = $zookeeper::params::service_stdout_logfile_maxsize,
   $service_stopasgroup    = hiera('zookeeper::service_stopasgroup', $zookeeper::params::service_stopasgroup),
   $service_stopsignal     = $zookeeper::params::service_stopsignal,
-  $sync_limit             = $zookeeper::params::sync_limit,
-  $tick_time              = $zookeeper::params::tick_time,
   $user                   = $zookeeper::params::user,
   $zookeeper_start_binary = $zookeeper::params::zookeeper_start_binary,
 ) inherits zookeeper::params {
 
-  if !is_integer($autopurge_purge_interval) {
-    fail('The $autopurge_purge_interval parameter must be an integer number')
-  }
-  if !is_integer($autopurge_snap_retain_count) {
-    fail('The $autopurge_snap_retain_count parameter must be an integer number')
-  }
   if !is_integer($client_port) { fail('The $client_port parameter must be an integer number') }
   validate_string($command)
   validate_absolute_path($config)
+  validate_hash($config_map)
   validate_string($config_template)
   validate_absolute_path($data_dir)
+  validate_absolute_path($data_log_dir)
   validate_string($group)
-  if !is_integer($init_limit) { fail('The $init_limit parameter must be an integer number') }
-  if !is_integer($leader_election_port) { fail('The $leader_election_port parameter must be an integer number') }
-  if !is_integer($max_client_connections) { fail('The $max_client_connections parameter must be an integer number') }
   if !is_integer($myid) { fail('The $myid parameter must be an integer number') }
   validate_string($package_name)
   validate_string($package_ensure)
-  if !is_integer($peer_port) { fail('The $peer_port parameter must be an integer number') }
   validate_array($quorum)
   validate_bool($service_autorestart)
   validate_bool($service_enable)
@@ -73,8 +67,6 @@ class zookeeper (
   validate_string($service_stdout_logfile_maxsize)
   validate_bool($service_stopasgroup)
   validate_string($service_stopsignal)
-  if !is_integer($sync_limit) { fail('The $sync_limit parameter must be an integer number') }
-  if !is_integer($tick_time) { fail('The $tick_time parameter must be an integer number') }
   validate_string($user)
   validate_absolute_path($zookeeper_start_binary)
 

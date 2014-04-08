@@ -1,8 +1,27 @@
 # Change log
 
-## 1.0.7 (unreleased)
+## 1.0.7 (April 08, 2014)
 
-* TBD
+IMPROVEMENTS
+
+* Support the `$data_log_dir` parameter for setting ZooKeepers `dataLogDir` parameter.  This allows you to split the
+  directory for transaction logs (`dataLogDir`) from the directory containing snapshot files (`dataDir`), which is the
+  recommended production setup for ZooKeeper.
+* Support the `$config_map` parameter.  This parameter (a Puppet hash) can be used to inject arbitrary key-value pairs
+  into the ZooKeeper configuration file.
+* The unused class parameters `$leader_election_port` and `$peer_port` were removed.
+
+BACKWARDS INCOMPATIBILITY
+
+* The following class parameters have been removed.  You should set those via the new `$config_map` parameter instead.
+  Note: The new default ZK configuration (which makes use of a default value for `$config_map`) is equivalent to the
+  previous default ZK configuration, i.e. settings such as `$autopurge_purge_interval` were moved to `$config_map`.
+    * `$autopurge_purge_interval`
+    * `$autopurge_snap_retain_count`
+    * `$init_limit`
+    * `$max_client_connections`
+    * `$sync_limit`
+    * `$tick_time`
 
 
 ## 1.0.6 (April 08, 2014)

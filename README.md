@@ -22,6 +22,7 @@ Table of Contents
         * <a href="#manifests">Using Puppet manifests</a>
     * <a href="#service-management">Service management</a>
     * <a href="#log-files">Log files</a>
+* <a href="#known-issues">Known issues and limitations</a>
 * <a href="#todo">TODO</a>
 * <a href="#changelog">Change log</a>
 * <a href="#contributing">Contributing</a>
@@ -109,8 +110,15 @@ Then use librarian-puppet to install (or update) the Puppet modules.
 
 # Configuration
 
-* See [init.pp](manifests/init.pp) for the list of currently supported configuration parameters.  These should be self-explanatory.
+* See [init.pp](manifests/init.pp) for the list of currently supported configuration parameters.  These should be
+  self-explanatory.
 * See [params.pp](manifests/params.pp) for the default values of those configuration parameters.
+
+Of special note is the class parameter `$config_map` in [broker.pp](manifests/broker.pp):  You can use this parameter
+to "inject" arbirtary ZooKeeper config settings via Hiera/YAML into the ZooKeeper configuration file (default name:
+`zoo.cfg`).  However you should not re-define config settings via `$config_map` that already have explicit Puppet class
+parameters (such as `$data_dir`, `$data_log_dir`, `$client_port`, `$myid`, `$quorum`).  See the examples below for more
+information on `$config_map` usage.
 
 
 <a name="usage"></a>
@@ -139,7 +147,7 @@ classes:
   - zookeeper::service
 ```
 
-More sophisticated example that overrides some of the default settings:
+A more sophisticated example that overrides some of the default settings and also demonstrates the use of `$config_map`.
 
 ```yaml
 ---
@@ -152,9 +160,14 @@ supervisor::logfile_maxbytes: '20MB'
 supervisor::logfile_backups: 5
 
 ## ZooKeeper
-zookeeper::autopurge_snap_retain_count: 3
-zookeeper::max_client_connections: 500
 zookeeper::myid: 1
+zookeeper::config_map:
+  autopurge.purgeInterval: 48
+  autopurge.snapRetainCount: 3
+  initLimit: 15
+  maxClientCnxns: 500
+  syncLimit: 3
+  tickTime: 3000
 
 ## If you want to use a quorum (of usually 3 or 5 ZooKeeper servers), use a configuration similar
 ## to the following.  Make sure to set 'zookeeper::myid' appropriately for the machines in the
@@ -209,6 +222,20 @@ _Note: The locations below may be different depending on the ZooKeeper RPM you a
     * `/var/log/supervisor/zookeeper/zookeeper.out`
     * `/var/log/supervisor/zookeeper/zookeeper.err`
 * Supervisord main log file: `/var/log/supervisor/supervisord.log`
+
+
+<a name="known-issues"></a>
+
+# Known issues and limitations
+
+## ZooKeeper configuration for `dataDir` and `dataLogDir`
+
+ZooKeeper requires the initialization of both `dataDir` (`$data_dir` class parameter) and `dataLogDir` (`$data_log_dir`
+class parameter).  However the initialization script shipped with ZooKeeper only allows you to initialize both at the
+same time, and it will fail/exit whenever one (or both) of them are already initialized.  Unfortunately, this behavior
+of ZooKeeper means that you will not be easily able to change from an existing dataDir-only deployment to a setup that
+splits dataDir and dataLogDir -- doing so requires manual intervention.  Of course if you create a ZooKeeper machine
+from scratch than both variants (dataDir-only and dataDir+dataLogDir setups) will work out of the box.
 
 
 <a name="todo"></a>

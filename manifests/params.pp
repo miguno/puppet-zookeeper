@@ -1,8 +1,6 @@
 # == Class zookeeper::params
 #
 class zookeeper::params {
-  $autopurge_purge_interval    = 24
-  $autopurge_snap_retain_count = 5
   $client_port            = 2181
   $zookeeper_start_binary = '/usr/bin/zookeeper-server' # managed by zookeeper-server RPM, do not change unless you
                                                         # are certain that your RPM uses a different path
@@ -10,17 +8,23 @@ class zookeeper::params {
   $command                = "${zookeeper_start_binary} start-foreground"
   $config                 = '/etc/zookeeper/conf/zoo.cfg' # managed by zookeeper-server RPM, do not change unless you
                                                           # are certain that your RPM uses a different path
+  $config_map             = {
+                              'autopurge.purgeInterval'   => 24,
+                              'autopurge.snapRetainCount' => 5,
+                              'initLimit'                 => 10,
+                              'maxClientCnxns'            => 50,
+                              'syncLimit'                 => 5,
+                              'tickTime'                  => 2000,
+                            }
   $config_template        = 'zookeeper/zoo.cfg.erb'
   $data_dir               = '/var/lib/zookeeper'
+  # Because $dataLogDir relies on $data_dir, it must be defined AFTER $data_dir.
+  $data_log_dir           = $data_dir
   $group                  = 'zookeeper' # managed by zookeeper-server RPM, do not change unless you are certain that
                                         # your RPM uses a different group
-  $init_limit             = 10
-  $leader_election_port   = 3888
-  $max_client_connections = 50
   $myid                   = 1
   $package_name           = 'zookeeper-server'
   $package_ensure         = 'present'
-  $peer_port              = 2888
   # If you want to use a quorum (normally 3 or 5 members), set this variable to e.g.
   # ['server.1=zookeeper1:2888:3888', 'server.2=zookeeper2:2888:3888', ...] where # server.<X> corresponds to a
   # machine's 'zookeeper::myid'.
@@ -38,8 +42,6 @@ class zookeeper::params {
   $service_stdout_logfile_maxsize = '20MB'
   $service_stopasgroup    = true
   $service_stopsignal     = 'INT'
-  $sync_limit             = 5
-  $tick_time              = 2000
   $user                   = 'zookeeper' # managed by zookeeper-server RPM, do not change unless you are certain that
                                         # your RPM uses a different user
   case $::osfamily {

@@ -64,6 +64,55 @@ describe 'zookeeper' do
 
         end
 
+        describe "zookeeper class with a custom data log dir on #{osfamily}" do
+          let(:params) {{
+            :data_log_dir => '/var/foo/data-log-dir'
+          }}
+
+          it { should contain_file(default_configuration_file).
+            with_content(/^dataLogDir=\/var\/foo\/data-log-dir$/)
+          }
+
+          it { should contain_file('/var/foo/data-log-dir').with({
+            'ensure'       => 'directory',
+            'owner'        => 'zookeeper',
+            'group'        => 'zookeeper',
+            'mode'         => '0755',
+            'recurse'      => true,
+            'recurselimit' => 0,
+            'require'      => 'Package[zookeeper-server]',
+          })}
+
+        end
+
+        describe "zookeeper class with a custom config_map on #{osfamily}" do
+          let(:params) {{
+            :config_map => {
+              'autopurge.purgeInterval'   => 24,
+              'autopurge.snapRetainCount' => 5,
+              'minSessionTimeout'         => 10000,
+              'maxSessionTimeout'         => 20000,
+            }
+          }}
+
+          it { should contain_file(default_configuration_file).
+            with_content(/^autopurge\.purgeInterval=24$/).
+            with_content(/^autopurge\.snapRetainCount=5$/).
+            with_content(/^minSessionTimeout=10000$/).
+            with_content(/^maxSessionTimeout=20000$/)
+          }
+
+        end
+
+        describe "zookeeper class with a non-hash config_map on #{osfamily}" do
+          let(:params) {{
+            :config_map => 'maxSessionTimeout=20000',
+          }}
+          it { expect { should contain_class('zookeeper') }.to raise_error(Puppet::Error,
+            /"maxSessionTimeout=20000" is not a Hash.  It looks to be a String/)
+          }
+        end
+
         describe "zookeeper class with a custom quorum on #{osfamily}" do
           let(:params) {{
             :quorum => ['server.1=zk1:2888:3888', 'server.2=zk2:2888:3888', 'server.3=zk3:2888:3888']
