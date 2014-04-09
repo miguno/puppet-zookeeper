@@ -66,6 +66,7 @@ See section [Usage](#usage) below.
       intentionally not puppet-require Java directly.
 * This module requires the following **additional Puppet modules**:
 
+    * [puppetlabs/stdlib](https://github.com/puppetlabs/puppetlabs-stdlib)
     * [puppet-supervisor](https://github.com/miguno/puppet-supervisor)
 
   It is recommended that you add these modules to your Puppet setup via
