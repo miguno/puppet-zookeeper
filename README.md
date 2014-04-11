@@ -115,11 +115,11 @@ Then use librarian-puppet to install (or update) the Puppet modules.
   self-explanatory.
 * See [params.pp](manifests/params.pp) for the default values of those configuration parameters.
 
-Of special note is the class parameter `$config_map` in [broker.pp](manifests/broker.pp):  You can use this parameter
-to "inject" arbirtary ZooKeeper config settings via Hiera/YAML into the ZooKeeper configuration file (default name:
-`zoo.cfg`).  However you should not re-define config settings via `$config_map` that already have explicit Puppet class
-parameters (such as `$data_dir`, `$data_log_dir`, `$client_port`, `$myid`, `$quorum`).  See the examples below for more
-information on `$config_map` usage.
+Of special note is the class parameter `$config_map`:  You can use this parameter to "inject" arbirtary ZooKeeper
+config settings via Hiera/YAML into the ZooKeeper configuration file (default name: `zoo.cfg`).  However you should not
+re-define config settings via `$config_map` that already have explicit Puppet class parameters (such as `$data_dir`,
+`$data_log_dir`, `$client_port`, `$myid`, `$quorum`).  See the examples below for more information on `$config_map`
+usage.
 
 
 <a name="usage"></a>
