@@ -245,7 +245,8 @@ from scratch than both variants (dataDir-only and dataDir+dataLogDir setups) wil
 
 * Enhance in-line documentation of Puppet manifests.
 * Add more unit tests and specs.
-* Add rollback/remove functionality to complete purge ZooKeeper related packages and configuration files from a machine.
+* Add rollback/remove functionality to completely purge ZooKeeper related packages and configuration files from a
+  machine.
 
 
 <a name="changelog"></a>
