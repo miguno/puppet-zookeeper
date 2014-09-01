@@ -26,7 +26,7 @@ class zookeeper::params {
   $package_name           = 'zookeeper-server'
   $package_ensure         = 'present'
   # If you want to use a quorum (normally 3 or 5 members), set this variable to e.g.
-  # ['server.1=zookeeper1:2888:3888', 'server.2=zookeeper2:2888:3888', ...] where # server.<X> corresponds to a
+  # ['server.1=zookeeper1:2888:3888', 'server.2=zookeeper2:2888:3888', ...] where 'server.<X>' corresponds to a
   # machine's 'zookeeper::myid'.
   $quorum                 = []
   $service_autorestart    = true
