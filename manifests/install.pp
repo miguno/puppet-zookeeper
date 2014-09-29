@@ -3,8 +3,8 @@
 class zookeeper::install inherits zookeeper {
 
   package { 'zookeeper-server':
-    ensure  => $package_ensure,
-    name    => $package_name,
+    ensure => $package_ensure,
+    name   => $package_name,
   }
 
   # We provide a custom zookeeper-server startup script.  This script fixes a problem where supervisord is not able to
