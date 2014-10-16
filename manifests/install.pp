@@ -21,7 +21,8 @@ class zookeeper::install inherits zookeeper {
   # This exec ensures we create intermediate directories for $data_dir as required
   exec { 'create-zookeeper-data-directory':
     command => "mkdir -p ${data_dir}",
-    path    => ['/bin', '/sbin'],
+    path    => ['/bin', '/sbin', '/usr/bin/', '/usr/sbin/'],
+    unless  => "test -d ${data_dir}",
     require => Package['zookeeper-server'],
   }
   ->
@@ -51,7 +52,8 @@ class zookeeper::install inherits zookeeper {
     # This exec ensures we create intermediate directories for $data_dir as required
     exec { 'create-zookeeper-data-log-directory':
       command => "mkdir -p ${data_log_dir}",
-      path    => ['/bin', '/sbin'],
+      path    => ['/bin', '/sbin', '/usr/bin/', '/usr/sbin/'],
+      unless  => "test -d ${data_log_dir}",
       require => Package['zookeeper-server'],
     }
     ->
