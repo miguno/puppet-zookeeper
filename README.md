@@ -211,6 +211,10 @@ to interact with ZooKeeper.
     $ echo ruok | nc <zookeeper-ip> 2181
     imok
 
+_Note: A response of "imok" does not necessarily indicate that the server has joined the quorum, just that the server_
+_process is active and bound to the specified client port. Use "stat" for details on state wrt quorum and client_
+_connection information._
+
 
 <a name="log-files"></a>
 
