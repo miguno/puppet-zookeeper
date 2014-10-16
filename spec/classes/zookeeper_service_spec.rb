@@ -14,14 +14,6 @@ describe 'zookeeper::service' do
 
           it { should contain_class('zookeeper::service') }
 
-          it { should contain_exec('zookeeper-initialize').with({
-            'command' => 'service zookeeper-server init',
-            'path'    => ['/usr/bin', '/usr/sbin', '/sbin', '/bin'],
-            'user'    => 'root',
-            'onlyif'  => 'test ! -d /var/lib/zookeeper/version-2',
-            'require' => [ 'Class[Zookeeper::Install]', 'Class[Zookeeper::Config]' ],
-          })}
-
           it { should contain_supervisor__service('zookeeper').with({
             'ensure'      => 'present',
             'enable'      => true,
@@ -38,7 +30,7 @@ describe 'zookeeper::service' do
             'stdout_logfile_keep'    => 5,
             'stderr_logfile_maxsize' => '20MB',
             'stderr_logfile_keep'    => 10,
-            'require'     => [ 'Exec[zookeeper-initialize]', 'Class[Zookeeper::Config]', 'Class[Supervisor]' ],
+            'require'     => [ 'Class[Zookeeper::Config]', 'Class[Supervisor]' ],
           })}
 
           it { should contain_service('zookeeper-server').with({
@@ -53,7 +45,7 @@ describe 'zookeeper::service' do
             'refreshonly' => true,
             'subscribe'   => 'File[/etc/zookeeper/conf/zoo.cfg]',
             'onlyif'      => 'which supervisorctl &>/dev/null',
-            'require'     => 'Class[Supervisor]',
+            'require'     => [ 'Class[Zookeeper::Config]', 'Class[Supervisor]' ],
           })}
         end
 

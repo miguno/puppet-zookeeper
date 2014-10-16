@@ -34,6 +34,16 @@ describe 'zookeeper' do
             'require'      => 'Package[zookeeper-server]',
           })}
 
+          it { should contain_file('/var/lib/zookeeper/version-2').with({
+            'ensure'       => 'directory',
+            'owner'        => 'zookeeper',
+            'group'        => 'zookeeper',
+            'mode'         => '0755',
+            'recurse'      => true,
+            'recurselimit' => 0,
+            'require'      => 'Package[zookeeper-server]',
+          })}
+
           it { should_not contain_file('zookeeper-myid') }
 
           it { should contain_file('/usr/bin/zookeeper-server').with({
@@ -73,7 +83,37 @@ describe 'zookeeper' do
             with_content(/^dataLogDir=\/var\/foo\/data-log-dir$/)
           }
 
+          # The data log directory should be at its custom location.
           it { should contain_file('/var/foo/data-log-dir').with({
+            'ensure'       => 'directory',
+            'owner'        => 'zookeeper',
+            'group'        => 'zookeeper',
+            'mode'         => '0755',
+            'recurse'      => true,
+            'recurselimit' => 0,
+            'require'      => 'Package[zookeeper-server]',
+          })}
+          it { should contain_file('/var/foo/data-log-dir/version-2').with({
+            'ensure'       => 'directory',
+            'owner'        => 'zookeeper',
+            'group'        => 'zookeeper',
+            'mode'         => '0755',
+            'recurse'      => true,
+            'recurselimit' => 0,
+            'require'      => 'Package[zookeeper-server]',
+          })}
+
+          # The data directory should still be at its default location.
+          it { should contain_file('/var/lib/zookeeper').with({
+            'ensure'       => 'directory',
+            'owner'        => 'zookeeper',
+            'group'        => 'zookeeper',
+            'mode'         => '0755',
+            'recurse'      => true,
+            'recurselimit' => 0,
+            'require'      => 'Package[zookeeper-server]',
+          })}
+          it { should contain_file('/var/lib/zookeeper/version-2').with({
             'ensure'       => 'directory',
             'owner'        => 'zookeeper',
             'group'        => 'zookeeper',
@@ -113,9 +153,10 @@ describe 'zookeeper' do
           }
         end
 
-        describe "zookeeper class with a custom quorum on #{osfamily}" do
+        describe "zookeeper class with a custom myid and custom quorum on #{osfamily}" do
           let(:params) {{
-            :quorum => ['server.1=zk1:2888:3888', 'server.2=zk2:2888:3888', 'server.3=zk3:2888:3888']
+            :myid   => 2,
+            :quorum => ['server.1=zk1:2888:3888', 'server.2=zk2:2888:3888', 'server.3=zk3:2888:3888'],
           }}
 
           it { should contain_file(default_configuration_file).
@@ -130,16 +171,8 @@ describe 'zookeeper' do
             'owner'        => 'zookeeper',
             'group'        => 'zookeeper',
             'mode'         => '0644',
-            'content'      => "1\n",
+            'content'      => "2\n",
             'require'      => 'Class[Zookeeper::Install]',
-          })}
-
-          it { should contain_exec('zookeeper-initialize').with({
-              'command' => 'service zookeeper-server init',
-              'path'    => ['/usr/bin', '/usr/sbin', '/sbin', '/bin'],
-              'user'    => 'root',
-              'onlyif'  => 'test ! -d /var/lib/zookeeper/version-2 -o ! -s /var/lib/zookeeper/myid',
-              'require' => [ 'Class[Zookeeper::Install]', 'Class[Zookeeper::Config]' ],
           })}
 
           it { should contain_exec('restart-zookeeper').with({
@@ -149,7 +182,7 @@ describe 'zookeeper' do
             'refreshonly' => true,
             'subscribe'   => [ 'File[/etc/zookeeper/conf/zoo.cfg]', 'File[zookeeper-myid]' ],
             'onlyif'      => 'which supervisorctl &>/dev/null',
-            'require'     => 'Class[Supervisor]',
+            'require'     => [ 'Class[Zookeeper::Config]', 'Class[Supervisor]' ],
           })}
         end
 

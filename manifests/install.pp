@@ -35,6 +35,17 @@ class zookeeper::install inherits zookeeper {
     # Require is needed because the zookeeper-server package manages the user
     require      => Package['zookeeper-server'],
   }
+  ->
+  file { "${data_dir}/version-2":
+    ensure       => directory,
+    owner        => $user,
+    group        => $group,
+    mode         => '0755',
+    recurse      => true,
+    recurselimit => 0,
+    # Require is needed because the zookeeper-server package manages the user
+    require      => Package['zookeeper-server'],
+  }
 
   if $data_log_dir != $data_dir {
     # This exec ensures we create intermediate directories for $data_dir as required
@@ -45,6 +56,17 @@ class zookeeper::install inherits zookeeper {
     }
     ->
     file { $data_log_dir:
+      ensure       => directory,
+      owner        => $user,
+      group        => $group,
+      mode         => '0755',
+      recurse      => true,
+      recurselimit => 0,
+      # Require is needed because the zookeeper-server package manages the user
+      require      => Package['zookeeper-server'],
+    }
+    ->
+    file { "${data_log_dir}/version-2":
       ensure       => directory,
       owner        => $user,
       group        => $group,
