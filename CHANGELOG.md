@@ -5,6 +5,7 @@
 IMPROVEMENTS
 
 * bootstrap: Use new GitHub.com URL for retrieving raw user content.
+* Data directory and data log directory are only created when needed. (thanks bazilek) [GH-3]
 
 BUG FIXES
 
