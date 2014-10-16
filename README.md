@@ -149,6 +149,7 @@ classes:
 ```
 
 A more sophisticated example that overrides some of the default settings and also demonstrates the use of `$config_map`.
+The snippet below also includes a (disabled) example for configuring ZooKeeper quorums.
 
 ```yaml
 ---
