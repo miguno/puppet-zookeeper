@@ -2,7 +2,14 @@
 
 ## 1.0.8 (unreleased)
 
+IMPROVEMENTS
+
 * bootstrap: Use new GitHub.com URL for retrieving raw user content.
+
+BUG FIXES
+
+* Fix and improve ZK initialization, which also resolves
+  [Wirbelsturm issue 25](https://github.com/miguno/wirbelsturm/issues/25).
 
 
 ## 1.0.7 (April 08, 2014)
