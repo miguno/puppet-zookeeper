@@ -1,6 +1,6 @@
 # Change log
 
-## 1.0.8 (unreleased)
+## 1.0.8 (October 16, 2014)
 
 IMPROVEMENTS
 
